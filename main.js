@@ -1,6 +1,4 @@
 const fs = require('fs');
-const { interceptors } = require('undici-types');
-
 
 function convertStringListInArray(valueList) {
     return valueList
@@ -25,7 +23,7 @@ function generateEnum(stringList) {
 }
 
 // Generate enum
-const enumOutput = generateEnum(inputStrings);
+const enumOutput = generateEnum(inputValuesConvertedInArray);
 
 // Save in file outputEnum.txt
 const outputPath = './outputEnum.txt';
