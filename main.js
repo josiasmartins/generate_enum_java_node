@@ -7,7 +7,7 @@ function convertStringListInArray(valueList) {
 }
 
 // Values user (INPUT)
-const inputValues = "NOME, OUTROS";
+const inputValues = "NOME, OUTROS,TESTéee";
 
 const inputValuesConvertedInArray = convertStringListInArray(inputValues);
 
@@ -18,8 +18,17 @@ const inputValuesConvertedInArray = convertStringListInArray(inputValues);
  */
 function generateEnum(stringList) {
   return stringList
-    .map(str => `${str.toUpperCase()}("${str.toUpperCase()}")`)
+    .map(str => `${removeAllAccents(str.toUpperCase())}("${str.toUpperCase()}")`)
     .join(',\n') + ';';
+}
+
+function removeAllAccents(item) {
+  // Normaliza a string para a forma NFD (Decomposição de Normalização)
+  // Isso separa caracteres acentuados em caractere base + marca de acento
+  return item
+    .normalize("NFD")
+    // Remove os códigos de acentos combinados (que variam de U+0300 a U+036F)
+    .replace(/[\u0300-\u036f]/g, ''); // Substitui por uma string vazia
 }
 
 // Generate enum
